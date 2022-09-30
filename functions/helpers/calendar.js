@@ -1,18 +1,41 @@
+const pool = require('./client')
 const formattedReturn = require('./formattedReturn')
-const Client = require('pg').Client
 
 module.exports = calendarHelpers = {
-  async test (event) {
+  async getPupils (event) {
     try {
-      const pool = new Client({
-        connectionString: process.env.DB_CONNECTION_STRING,
-        ssl: { rejectUnauthorized: false }
-      })
+      const data = await pool.query(`select * from pupils order by id`)
 
-
-      await pool.connect()
-      const data = await pool.query('SELECT * FROM tabledata')
-
+      return formattedReturn(200, data)
+    } catch (error) {
+      return formattedReturn(400, 'error')
+    }
+  },
+  async updateDebt (event) {
+    try {
+      const { id, newDebt } = JSON.parse(event.body)
+      await pool.query(`update pupils set debt = ${newDebt} where id = ${id}`)
+      const data = await pool.query('select * from pupils order by id')
+      return formattedReturn(200, data)
+    } catch (error) {
+      return formattedReturn(400, 'error')
+    }
+  },
+  async post (event) {
+    try {
+      const { name, price } = JSON.parse(event.body)
+      await pool.query(`insert into pupils (name, price, debt) values ('${name}', ${price}, 0)`)
+      const data = await pool.query('select * from pupils order by id')
+      return formattedReturn(200, data)
+    } catch (error) {
+      return formattedReturn(400, 'error')
+    }
+  },
+  async delete (event) {
+    try {
+      const { id } = JSON.parse(event.body)
+      await pool.query(`delete from pupils where id = ${id}`)
+      const data = await pool.query('select * from pupils order by id')
       return formattedReturn(200, data)
     } catch (error) {
       return formattedReturn(400, 'error')

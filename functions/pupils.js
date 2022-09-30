@@ -3,13 +3,16 @@ const formattedReturn = require('./helpers/formattedReturn')
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'GET') {
-    return calendarHelpers.test(event)
+    return await calendarHelpers.getPupils(event)
   }
   if (event.httpMethod === 'POST') {
+    return await calendarHelpers.post(event)
   }
   if (event.httpMethod === 'PUT') {
+    return await calendarHelpers.updateDebt(event)
   }
   if (event.httpMethod === 'DELETE') {
+    return await calendarHelpers.delete(event)
   }
   if (event.httpMethod === 'OPTIONS') {
     const headers = {
