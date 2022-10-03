@@ -1,18 +1,15 @@
-const pupilsHelpers = require('./helpers/pupils')
 const formattedReturn = require('./helpers/formattedReturn')
+const calendarHelpers = require('./helpers/calendar')
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'GET') {
-    return await pupilsHelpers.getPupils(event)
+    return calendarHelpers.getCalendar(event)
   }
   if (event.httpMethod === 'POST') {
-    return await pupilsHelpers.post(event)
   }
   if (event.httpMethod === 'PUT') {
-    return await pupilsHelpers.updateDebt(event)
   }
   if (event.httpMethod === 'DELETE') {
-    return await pupilsHelpers.delete(event)
   }
   if (event.httpMethod === 'OPTIONS') {
     const headers = {

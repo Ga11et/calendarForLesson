@@ -26,6 +26,7 @@ export default {
 <style lang="scss" scoped>
 @import '../variables';
 .pupilsCont{
+  width: 1280px;
   margin: 10px;
   display: grid;
   grid-template-columns: 20px min-content;

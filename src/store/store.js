@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { pupilsSlice } from './modules/pupils'
+import { calendarSlice } from './modules/calendar'
 
 export default createStore({
   state: {},
@@ -7,6 +8,7 @@ export default createStore({
   mutations: {},
   actions: {},
   modules: {
-    pupilsSlice
+    pupilsSlice,
+    calendarSlice
   }
 })
