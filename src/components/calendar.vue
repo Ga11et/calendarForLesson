@@ -5,23 +5,23 @@
   </section>
 </template>
 <script>
-import Icons from "./icons.vue";
-import CalendarCard from './calendarCard.vue';
+import Icons from "./icons.vue"
+import CalendarCard from "./calendarCard.vue"
 export default {
-    name: "calendar",
-    mounted() {
-        this.$store.dispatch("getDays");
-        this.$store.dispatch("getLessons");
+  name: "calendar",
+  mounted() {
+    this.$store.dispatch("getDays")
+    this.$store.dispatch("getLessons")
+  },
+  computed: {
+    days() {
+      return this.$store.getters.days
     },
-    computed: {
-        days() {
-            return this.$store.getters.days;
-        },
-        isLoading() {
-            return this.$store.getters.isCalendarLoading;
-        }
-    },
-    components: { Icons, CalendarCard }
+    isLoading() {
+      return this.$store.getters.isCalendarLoading
+    }
+  },
+  components: { Icons, CalendarCard }
 }
 </script>
 <style lang="scss" scoped>

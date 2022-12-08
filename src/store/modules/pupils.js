@@ -28,11 +28,12 @@ export const pupilsSlice = {
       commit('setPupils', pupils) 
       commit('setLoading', false)
     },
-    async updatePupil ({ commit }, data) {
+    async updatePupil ({ commit, dispatch }, data) {
       commit('setLoading', true)
       const pupils = await pupilsAPI.update(data)
       commit('setPupils', pupils) 
       commit('setLoading', false)
+      dispatch('getSecondLogs')
     },
     async postPupil ({ commit }, data) {
       commit('setLoading', true)

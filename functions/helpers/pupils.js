@@ -14,7 +14,15 @@ module.exports = pupilsHelpers = {
   async updateDebt (event) {
     try {
       const { id, newDebt } = JSON.parse(event.body)
+
+      const {name, debt} = await pool.query(`select * from pupils where id = ${id}`)
+        .then(resp => resp.rows[0])
+
       await pool.query(`update pupils set debt = ${newDebt} where id = ${id}`)
+
+      const log = `${new Date().toLocaleDateString()}: Изменен долг ученика ${name} с ${debt} на ${newDebt}`
+
+      await pool.query(`insert into logs (log) values ('${log}')`)
       const data = await pool.query('select * from pupils order by id')
       return formattedReturn(200, data)
     } catch (error) {

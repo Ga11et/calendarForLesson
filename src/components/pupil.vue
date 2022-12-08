@@ -16,25 +16,25 @@
 <script>
 import Icons from './icons.vue';
 export default {
-    name: "pupil-card",
-    props: ["content"],
-    methods: {
-        btnHandler() {
-            this.$store.dispatch("updatePupil", { id: this.content.id, newDebt: this.content.debt + 1 });
-        },
-        debtHandler() {
-            this.$store.dispatch("updatePupil", { id: this.content.id, newDebt: this.content.debt - 1 });
-        },
-        deleteHandler () {
-          this.$store.dispatch("deletePupil", this.content.id);
-        }
-    },
-    computed: {
-        isPupilsLoading() {
-            return this.$store.getters.isPupilsLoading;
-        }
-    },
-    components: { Icons }
+  name: "pupil-card",
+  props: ["content"],
+  methods: {
+      btnHandler() {
+          this.$store.dispatch("updatePupil", { id: this.content.id, newDebt: this.content.debt + 1 });
+      },
+      debtHandler() {
+          this.$store.dispatch("updatePupil", { id: this.content.id, newDebt: this.content.debt - 1 });
+      },
+      deleteHandler () {
+        this.$store.dispatch("deletePupil", this.content.id);
+      }
+  },
+  computed: {
+      isPupilsLoading() {
+          return this.$store.getters.isPupilsLoading;
+      }
+  },
+  components: { Icons }
 }
 </script>
 <style lang="scss" scoped>
